@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: "Kanit";
+  }
+
+  .btn {
+    min-height: 0;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    min-width: 100px;
+  }
+}
