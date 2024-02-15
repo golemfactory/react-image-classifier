@@ -1,12 +1,12 @@
-import useAppKey from "../connection/useAppKey";
+import { useYagna } from "@golem-sdk/react";
 
 export default function LogoutButton() {
-  const [_, setAppKey] = useAppKey();
+  const { setYagnaOptions } = useYagna();
   return (
     <button
       className="btn btn-primary btn-ghost"
       onClick={() => {
-        setAppKey(null);
+        setYagnaOptions({ apiKey: null });
       }}
     >
       Change App Key

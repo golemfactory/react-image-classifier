@@ -1,8 +1,8 @@
+import { useYagna } from "@golem-sdk/react";
 import { useState } from "react";
-import useAppKey from "./useAppKey";
 
 export default function SetAppKeyForm() {
-  const [_, setAppKey] = useAppKey();
+  const { setYagnaOptions } = useYagna();
 
   const [userInput, setUserInput] = useState("");
 
@@ -39,7 +39,9 @@ export default function SetAppKeyForm() {
               className="btn btn-primary"
               disabled={!userInput}
               onClick={() => {
-                setAppKey(userInput);
+                setYagnaOptions({
+                  apiKey: userInput,
+                });
               }}
             >
               Continue to app
