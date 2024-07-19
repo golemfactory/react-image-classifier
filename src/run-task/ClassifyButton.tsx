@@ -1,6 +1,7 @@
-import { TaskExecutor, Worker, useTask } from "@golem-sdk/react";
+import { useTask } from "@golem-sdk/react";
 import useModal from "../modal/useModal";
 import ResultsModalContent from "../results/ResultsModalContent";
+import type { TaskFunction, TaskExecutor } from "@golem-sdk/task-executor";
 
 type Result = Array<{ label: string; score: number; box: Array<number> }>;
 
@@ -21,7 +22,7 @@ function readFile(file: File): Promise<Uint8Array> {
 
 async function classifyOnGolem(
   image: File,
-  runFunction: (ctx: Worker<Result>) => Promise<void>
+  runFunction: (ctx: TaskFunction<Result>) => Promise<void>
 ) {
   const extension = image.name.split(".").pop();
   const input = `/golem/input/img.${extension}`;
