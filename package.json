@@ -12,8 +12,8 @@
   "dependencies": {
     "@fontsource/kanit": "^5.0.18",
     "@golem-sdk/golem-js": "^3.1.0",
-    "@golem-sdk/react": "^3.0.0",
-    "@golem-sdk/task-executor": "^2.0.0-beta.1",
+    "@golem-sdk/react": "^4.0.0",
+    "@golem-sdk/task-executor": "^2.0.0",
     "decimal.js": "^10.4.3",
     "jotai": "^2.6.0",
     "react": "^18.2.0",
