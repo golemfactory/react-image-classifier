@@ -1,6 +1,6 @@
 import { DragEventHandler, useRef, useState } from "react";
 import ClassifyButton from "./ClassifyButton";
-import { TaskExecutor } from "@golem-sdk/react";
+import { TaskExecutor } from "@golem-sdk/task-executor";
 
 type FileInput = {
   file: File;

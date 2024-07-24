@@ -1,9 +1,9 @@
-import { ExecutorOptions } from "@golem-sdk/react";
+import { TaskExecutorOptions } from "@golem-sdk/task-executor";
 
 type ExecutorOptionsFormProps = {
   disabled: boolean;
-  options: ExecutorOptions;
-  setOptions: (config: ExecutorOptions) => void;
+  options: TaskExecutorOptions;
+  setOptions: (config: TaskExecutorOptions) => void;
 };
 
 export default function ExecutorOptionsForm({
@@ -23,11 +23,14 @@ export default function ExecutorOptionsForm({
             type="text"
             placeholder="Type here"
             className="input input-bordered w-full max-w-xs"
-            value={options.subnetTag}
+            value={options.demand.subnetTag}
             onChange={(e) => {
               setOptions({
                 ...options,
-                subnetTag: e.target.value,
+                demand: {
+                  ...options.demand,
+                  subnetTag: e.target.value,
+                },
               });
             }}
           />
@@ -54,7 +57,7 @@ export default function ExecutorOptionsForm({
           />
         </div>
       </div>
-      <div className="grid grid-cols-5 gap-4 max-w-2xl  whitespace-nowrap">
+      <div className="grid grid-cols-4 gap-4 max-w-2xl  whitespace-nowrap">
         <div className="form-control">
           <label className="label">
             <span className="label-text">Min CPU cores</span>
@@ -62,14 +65,22 @@ export default function ExecutorOptionsForm({
           <input
             disabled={disabled}
             type="number"
-            step="0.1"
-            placeholder="0.00"
+            step="1"
+            placeholder="1"
+            min="1"
             className="input input-bordered w-full max-w-xs"
-            value={options.minCpuCores}
+            value={options.demand.workload?.minCpuCores}
             onChange={(e) => {
+              const value = parseInt(e.target.value);
               setOptions({
                 ...options,
-                minCpuCores: parseFloat(e.target.value),
+                demand: {
+                  ...options.demand,
+                  workload: {
+                    ...options.demand.workload,
+                    minCpuCores: isNaN(value) ? 1 : value,
+                  },
+                },
               });
             }}
           />
@@ -81,14 +92,22 @@ export default function ExecutorOptionsForm({
           <input
             disabled={disabled}
             type="number"
-            step="0.1"
-            placeholder="0.00"
+            step="1"
+            placeholder="1"
+            min="1"
             className="input input-bordered w-full max-w-xs"
-            value={options.minCpuThreads}
+            value={options.demand.workload?.minCpuThreads}
             onChange={(e) => {
+              const value = parseInt(e.target.value);
               setOptions({
                 ...options,
-                minCpuThreads: parseFloat(e.target.value),
+                demand: {
+                  ...options.demand,
+                  workload: {
+                    ...options.demand.workload,
+                    minCpuThreads: isNaN(value) ? 1 : value,
+                  },
+                },
               });
             }}
           />
@@ -100,14 +119,22 @@ export default function ExecutorOptionsForm({
           <input
             disabled={disabled}
             type="number"
-            step="0.1"
-            placeholder="0.00"
+            step="1"
+            placeholder="1"
+            min="1"
             className="input input-bordered w-full max-w-xs"
-            value={options.minMemGib}
+            value={options.demand.workload?.minMemGib}
             onChange={(e) => {
+              const value = parseInt(e.target.value);
               setOptions({
                 ...options,
-                minMemGib: parseFloat(e.target.value),
+                demand: {
+                  ...options.demand,
+                  workload: {
+                    ...options.demand.workload,
+                    minMemGib: isNaN(value) ? 1 : value,
+                  },
+                },
               });
             }}
           />
@@ -119,33 +146,22 @@ export default function ExecutorOptionsForm({
           <input
             disabled={disabled}
             type="number"
-            step="0.1"
-            placeholder="0.00"
+            step="1"
+            placeholder="1"
+            min="1"
             className="input input-bordered w-full max-w-xs"
-            value={options.minStorageGib}
+            value={options.demand.workload?.minStorageGib}
             onChange={(e) => {
+              const value = parseInt(e.target.value);
               setOptions({
                 ...options,
-                minStorageGib: parseFloat(e.target.value),
-              });
-            }}
-          />
-        </div>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Budget (GLM)</span>
-          </label>
-          <input
-            disabled={disabled}
-            type="number"
-            step="0.1"
-            placeholder="0.00"
-            className="input input-bordered w-full max-w-xs"
-            value={options.budget}
-            onChange={(e) => {
-              setOptions({
-                ...options,
-                budget: parseFloat(e.target.value),
+                demand: {
+                  ...options.demand,
+                  workload: {
+                    ...options.demand.workload,
+                    minStorageGib: isNaN(value) ? 1 : value,
+                  },
+                },
               });
             }}
           />

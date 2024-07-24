@@ -1,23 +1,37 @@
-import { ExecutorOptions, useExecutor } from "@golem-sdk/react";
+import { useExecutor } from "@golem-sdk/react";
 import { useState } from "react";
 import ExecutorOptionsForm from "./ExecutorConfigForm";
 import DragAndDropFiles from "./DragAndDropFiles";
+import { TaskExecutorOptions } from "@golem-sdk/task-executor";
 
 export default function RunTaskCard() {
-  const [executorOptions, setExecutorOptions] = useState<ExecutorOptions>({
-    package: "severyn/detr-resnet-50:latest",
-    enableLogging: false,
-    budget: 1,
-    subnetTag: "public",
-    payment: {
-      driver: "erc20",
-      network: "goerli",
+  const [executorOptions, setExecutorOptions] = useState<TaskExecutorOptions>({
+    demand: {
+      workload: {
+        imageTag: "severyn/detr-resnet-50:latest",
+        minCpuCores: 2,
+        minCpuThreads: 2,
+        minMemGib: 4,
+        minStorageGib: 4,
+      },
+      subnetTag: "public",
     },
-    minCpuCores: 1,
-    minMemGib: 8,
-    minCpuThreads: 1,
-    minStorageGib: 4,
-    maxParallelTasks: 5,
+    market: {
+      rentHours: 15 / 60,
+      pricing: {
+        model: "linear",
+        maxStartPrice: 0.5,
+        maxCpuPerHourPrice: 1.0,
+        maxEnvPerHourPrice: 0.5,
+      },
+    },
+    task: {
+      maxParallelTasks: 5,
+    },
+    payment: {
+      network: "holesky",
+    },
+    enableLogging: true,
   });
 
   const {
